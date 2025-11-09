@@ -1,0 +1,80 @@
+#include <stdio.h> 
+#include <stdlib.h>
+
+typedef struct SLL
+{	int data;
+struct SLL* next;
+} sll;
+
+
+sll* front = NULL; sll* rear = NULL;
+
+void enqueue(int element)
+{		sll* temp = (sll*)malloc(sizeof(sll)); 
+temp->data = element;
+temp->next = NULL; 
+if (rear == NULL)
+{
+front = rear = temp;
+}
+else
+{
+rear->next = temp; rear = temp;
+}
+}
+
+
+void dequeue()
+{
+if (front == NULL)
+{
+printf("Queue is empty\n");
+ 
+}
+else
+{
+sll* temp = front;
+printf("The %d element dequeued\n", temp->data); front = front->next;
+if (front == NULL)
+{
+rear = NULL;
+}
+free(temp);
+}
+}
+
+
+void display()
+{
+if (front == NULL)
+{
+printf("Queue is empty\n");
+}
+else
+{
+sll* temp = front;
+while (temp != NULL)
+{
+printf("%d ", temp->data); temp = temp->next;
+}
+}
+printf("\n");
+}
+ 
+
+int main()
+{
+printf("Enqueueing 5 elements...\n"); enqueue(10);
+enqueue(20); enqueue(30); enqueue(40); enqueue(50);
+
+printf("Queue elements: "); display();
+
+printf("Dequeueing elements...\n"); while (front != NULL)
+{
+dequeue();
+printf("Queue elements after dequeue: "); display();
+}
+
+
+return 0;
+} \]
