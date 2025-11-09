@@ -1,0 +1,86 @@
+#include <stdio.h> 
+#include<stdlib.h>
+
+struct STACKLL { int data;
+struct STACKLL* next;
+};
+typedef struct STACKLL stackll;
+
+
+stackll* top = NULL;
+
+
+
+
+void Push(); void Pop(); void Display();
+
+int main()
+{
+int ch;
+
+
+
+
+do
+{
+printf("\n**MENU" "\n1.Push" "\n2.Pop" "\n3.Display" "\n4.Exit");
+printf("\nEnter your choice:"); scanf("%d",&ch);
+switch(ch)
+ 
+{
+case 1:Push(); break;
+case 2:Pop(); break;
+case 3:Display(); break;
+case 4:break;
+default:printf("Wrong choice");
+}
+}while(ch!=4);
+
+
+return 0;
+}
+void Push()
+{
+int element;
+printf("\n enter the element:"); scanf("%d",&element);
+stackll*temp=(stackll *)malloc (sizeof(stackll)); temp->data=element;
+temp->next=NULL; if (top==NULL)
+{
+top=temp;
+}
+else
+{
+temp->next=top; top=temp;
+}
+ 
+}
+void Pop()
+{
+if (top==NULL)
+{
+printf("\n stack is empty.");
+}
+else{
+stackll* temp = top;
+printf("the %d element is popped",temp->data); top=temp->next;
+free(temp);
+}
+}
+
+
+void Display()
+{
+if (top==NULL)
+{
+printf("\n stack is empty.");
+}
+else{
+stackll* temp = top;
+for(temp=top;temp!=NULL;temp=temp->next)
+{
+printf("\n%d",temp->data);
+}
+}
+
+
+}
