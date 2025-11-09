@@ -1,0 +1,67 @@
+# in clu de<stdio.h ># de fin e size 10 stru ct Q U EU E
+{
+in t s[size ];
+in t fron t,re a r;
+};
+ty pede f stru ct QU EU E qu eu e ; qu eu e q ;
+v oid en qu eu e(); v oid dequ e ue (); v oid display ();
+v oid m a in ()
+{
+in t ch ; do
+{
+prin tf("\nM en u :\n 1 )En qu e ue \n 2 )De qu eu e\n 3 )D ispla y\n 4 )Exit"); prin tf("\nE nter y ou r ch oice :");
+sca n f("% d ", & ch ); sw itch ( ch )
+{
+ca se 1 :e n qu eu e();
+brea k ;
+ca se 2 :d equ eu e ();
+brea k ;
+ca se 3 :d isp la y();
+brea k ;
+ca se 4 :b rea k ;
+de fa u lt:p r in tf("\nW ro ng c h oice.");
+}
+}w h ile( ch != 4 );
+}
+v oid en qu eu e()
+{
+in t pa rc el;
+if(q .re ar= =size-1 )
+{
+prin tf("\nQ u eu e is ov erflow ed .");
+}
+else
+{
+prin tf("\nE nter th e pa rc el:");
+ 
+sca n f("% d ",& pa rc el); q.s[ q.re a r]= pa rc el;
+q.rea r+ +;
+}
+}
+v oid dequ e ue ()
+{
+if(q .fron t> q.rea r)
+{
+prin tf("\nQ u eu e is u nd erflow ed .");
+}
+else
+{
+prin tf("\n% d D elive re d pa rce l is:",q.s[ q.fron t ]);
+q.fron t++;
+}
+}
+v oid display ()
+{
+in t i;
+if(q .fron t> q.rea r)
+{
+prin tf("\nQ u eu e is u nd erflow ed .");
+}
+else
+{
+prin tf("\nQ u eu e pa rcel is: " ); for( i= q.fro nt;i<=q .re ar;i++)
+{
+prin tf("\n\t% d",q .s[i]);
+}
+}
+}
