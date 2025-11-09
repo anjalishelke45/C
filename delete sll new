@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct SLL {
+    char data[100];
+    struct SLL *next;
+};
+
+typedef struct SLL sll;
+sll *head = NULL;
+
+sll* create();
+void display(sll *head);
+sll* deletenode(sll *head);
+
+int main() {
+    int ch;
+    do {
+        printf("\nMenu:");
+        printf("\n1) Create list");
+        printf("\n2) Display list");
+        printf("\n3) Delete node");
+        printf("\n4) Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &ch);
+
+        switch(ch) {
+            case 1: head = create(); break;
+            case 2: display(head); break;
+            case 3: head = deletenode(head); break;
+            case 4: printf("Exited.\n"); break;
+            default: printf("Invalid choice!\n");
+        }
+    } while(ch != 4);
+
+    return 0;
+}
+
+sll* create() {
+    sll *temp, *last;
+    int n;
+    printf("\nEnter the number of lines: ");
+    scanf("%d", &n);
+
+    for(int i = 0; i < n; i++) {
+        temp = (sll*)malloc(sizeof(sll));
+        printf("Enter line %d: ", i + 1);
+        scanf(" %[^\n]", temp->data); // Corrected format
+        temp->next = NULL;
+
+        if(i == 0) {
+            head = temp;
+            last = temp;
+        } else {
+            last->next = temp;
+            last = temp;
+        }
+    }
+    return head;
+}
+
+void display(sll *head) {
+    sll *temp = head;
+    if(temp == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    printf("\nLines in list:\n");
+    while(temp != NULL) {
+        printf("%s\n", temp->data);
+        temp = temp->next;
+    }
+}
+
+sll* deletenode(sll *head) {
+    if(head == NULL) {
+        printf("List is empty!\n");
+        return head;
+    }
+
+    int pos, i;
+    sll *temp, *prev;
+
+    printf("Enter position to delete (1 for front, 2 or more for middle/end): ");
+    scanf("%d", &pos);
+
+    if(pos == 1) {
+        temp = head;
+        head = head->next;
+        free(temp);
+        printf("Node deleted from front.\n");
+    } else {
+        temp = head;
+        prev = NULL;
+        for(i = 1; i < pos && temp != NULL; i++) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if(temp != NULL) {
+            prev->next = temp->next;
+            free(temp);
+            printf("Node deleted from position %d.\n", pos);
+        } else {
+            printf("Position out of range!\n");
+        }
+    }
+    return head;
+}
