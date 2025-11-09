@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct SLL {
+char data[100];
+struct SLL *next;
+};
+
+
+typedef struct SLL sll; sll *head = NULL;
+
+sll* create();
+void display(sll *head); sll* insert(sll *head);
+
+int main() { int ch; do {
+printf("\nMenu:"); printf("\n1) Create list"); printf("\n2) Display list"); printf("\n3) Insert line"); printf("\n4) Exit");
+printf("\nEnter your choice: "); scanf("%d", &ch);
+
+switch (ch) {
+case 1: head = create(); break; case 2: display(head); break;
+case 3: head = insert(head); break;
+ 
+case 4: printf("Exited\n"); break; default: printf("Invalid choice!\n");
+}
+} while (ch != 4);
+
+
+return 0;
+}
+
+
+sll* create() {
+sll *temp, *last; int n;
+printf("\nEnter the number of lines: "); scanf("%d", &n);
+
+for (int i = 0; i < n; i++) {
+temp = (sll*)malloc(sizeof(sll)); printf("Enter line %d: ", i + 1);
+scanf(" %[^\n]", temp->data); // Reads entire line including spaces temp->next = NULL;
+
+if (i == 0) { head = temp; last = temp;
+} else {
+last->next = temp; last = temp;
+}
+}
+return head;
+}
+ 
+void display(sll *head) { sll *temp = head;
+if (temp == NULL) {
+printf("List is empty!\n"); return;
+}
+printf("\nLines in list:\n"); while (temp != NULL) {
+printf("%s\n", temp->data); temp = temp->next;
+}
+}
+
+
+sll* insert(sll *head) {
+sll *temp = (sll*)malloc(sizeof(sll)); int pos, i;
+printf("Enter the line to insert: "); scanf(" %[^\n]", temp->data);
+temp->next = NULL;
+
+
+printf("Enter position to insert (1 for front, 2 or more for middle/end): "); scanf("%d", &pos);
+
+if (pos == 1) {
+temp->next = head; head = temp;
+} else {
+sll *p = head;
+for (i = 1; i < pos - 1 && p != NULL; i++) p = p->next;
+ 
+if (p != NULL) {
+temp->next = p->next; p->next = temp;
+} else {
+sll *last = head;
+while (last->next != NULL) last = last->next;
+last->next = temp;
+}
+}
+return head;
+}
