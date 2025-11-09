@@ -1,0 +1,113 @@
+#include<stdio.h>
+#define size 10
+struct STACK
+{
+ int s[size];
+ int top;
+};
+typedef struct STACK stack;
+stack st;
+int isfull();
+int isempty();
+void push();
+void pop();
+void display();
+void main()
+{
+ int ch;
+ st.top=-1;
+ 
+ 
+ do{
+ printf("\nMenu:\n1)PUSH\n2)POP\n3)DISPLAY\n4)EXIT");
+ printf("\nEnter your choice:");
+ scanf("\n%d",&ch);
+ switch(ch)
+ {
+ case 1:push();
+ break;
+ case 2:pop();
+ break;
+ case 3:display();
+ break;
+ case 4:break;
+ default:printf("Wrong choice!");
+ }
+ 
+ }while(ch!=4);
+}
+int isfull()
+{
+ if(st.top==size-1)
+ {
+ printf("\nThe stack is full.");
+ 
+ }
+ else
+ return(0);
+ 
+}
+int isempty()
+{
+ if(st.top==-1)
+ {
+ printf("\nThe stack is empty.");
+ 
+ }
+ else
+ return(0);
+}
+void push()
+{
+ int parcel;
+ if(st.top==size-1)
+ {
+ printf("\nStack is overflowed.");
+ }
+ else
+ {
+ st.top++;
+ printf("\nEnter the element:");
+ scanf("\n%d",&parcel);
+ st.s[st.top]=parcel;
+ }
+ 
+}
+void pop()
+{
+ int item;
+ if(st.top==-1)
+ {
+ printf("\nStack is underflowed.");
+ }
+ else
+ {
+ item=st.s[st.top];
+ printf("\n%dThe parcel removed is:",item);
+ st.top--;
+ }
+ 
+}
+void display()
+{
+ int i;
+ if(st.top==-1)
+ {
+ printf("\nStack is empty.");
+ 
+ }
+ 
+ else
+ {
+ for(i=st.top;i>=0;i--)
+ {
+ printf("\n%d",st.s[i]);
+ }
+ }
+}
+
+
+
+
+
+
